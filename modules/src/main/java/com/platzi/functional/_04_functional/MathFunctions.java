@@ -35,28 +35,29 @@ public static void main(String[] args) {
     Boolean result =isEven.test(89);
     System.out.println(result);
 
+    /*
+    * en este predicado le Ingresamos un tipo en este caso va a ser de la clase estudiante  , en donde luego
+    * se va a verificar si ese estudiante  aprobo si su calificacion es >= 6.0*/
+    Predicate<Student> isApproved=student -> student.getCalificacion()>=6.0;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    Student jhonStudent=new Student(6.9);
+    System.out.println(isApproved.test(jhonStudent));
 
 }
+    static class Student{
+        private double calificacion;
+
+        public Student(double calificacion) {
+            this.calificacion = calificacion;
+        }
+
+        public double getCalificacion() {
+            return calificacion;
+        }
+
+        public void setCalificacion(double calificacion) {
+            this.calificacion = calificacion;
+        }
+    }
 }
 
