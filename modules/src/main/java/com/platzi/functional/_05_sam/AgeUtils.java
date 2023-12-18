@@ -6,16 +6,20 @@ import java.util.function.Function;
 
 public class AgeUtils {
     public static void main(String[] args) {
-        Function<Integer,String> addZeros=x->x<10?"0"+x:String.valueOf(x);
+        Function<Integer, String> addZeros = x -> x < 10 ? "0" + x : String.valueOf(x);
 
-        TriFunction<Integer,Integer,Integer, LocalDate> parseDate=(day,month,year)->LocalDate.parse(year+"-"+addZeros.apply(month)+"-"+addZeros.apply(day));
+        TriFunction<Integer, Integer, Integer, LocalDate> parseDate = (day, month, year) -> LocalDate
+                .parse(year + "-" + addZeros.apply(month) + "-" + addZeros.apply(day));
 
-        TriFunction<Integer,Integer,Integer,Integer>calculateAge=(day,month,year)-> Period.between(LocalDate.now(),parseDate.apply())
+        TriFunction<Integer, Integer, Integer, Integer> calculateAge = (day, month, year) -> Period
+                .between(parseDate.apply(day, month, year),LocalDate.now()).getYears();
 
-        System.out.println(parseDate.apply(5,10,2022));
+        System.out.println(parseDate.apply(5, 10, 2022));
+        System.out.println(calculateAge.apply(24,07,1996));
     }
+
     @FunctionalInterface
-    interface TriFunction<T,U,V,R>{
-        R apply(T t,U u,V v);
+    interface TriFunction<T, U, V, R> {
+        R apply(T t, U u, V v);
     }
 }
